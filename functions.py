@@ -17,36 +17,110 @@ def readfile(file):
 # 4 = nombre de transitions
 # 5 et après: transitions
 
-def afficher_automate(automate):
+
+def identifier_entrees(automate):
+    matrice = []
+    matrice = automate[2].split(' ')
+    for i in range(len(matrice)):
+        matrice[i] = int(matrice[i])
+    del matrice[0]
+    return matrice
+
+def identifier_sorties(automate):
+    matrice = []
+    matrice = automate[3].split(' ')
+    for i in range(len(matrice)):
+        matrice[i] = int(matrice[i])
+    del matrice[0]
+    return matrice
+
+
+def creer_alphabet(automate):
     alphabet = []
     for i in range(int(automate[0])):
         alphabet.append(chr(97 + i))
-        print("        " + alphabet[i], end="")
+    return alphabet
+
+def identifier_transition(ligne, lettre):
+    transition = []
+    transition = ligne.split(lettre)
+    return transition
+
+def afficher_automate(automate):
+    print("       ", end="")
+    alphabet = creer_alphabet(automate)
+    for i in range(int(automate[0])):
+        print("         " + alphabet[i], end="")
     print('\n')
-    for i in range(int(automate[1])):
-        if (" " + str(i)) in automate[2]:
-            print('E', end="")
-        if (" " + str(i)) in automate[3]:
-            print('S ', end="")
+    for i in range(int(automate[1])+1):
+        print(i, end=" | ")
+        entrees = identifier_entrees(automate)
+        sorties = identifier_sorties(automate)
+        if i in entrees and i not in sorties:
+            print('  E ', end="  |")
+            print(" ", end="")
+        elif i not in entrees and i in sorties:
+            print('  S ', end="  |")
+            print(" ", end="")
+        elif i in entrees and i in sorties:
+            print(" E/S", end="  | ")
+
         else:
-            print("  ", end="")
+            print("     ", end=" | ")
         print(i, end=" | ")
 
         for j in range(len(alphabet)):
             transitions_lettre = []
             for k in range(int(automate[4])):
                 k = k + 5
-                # prévoir pour nombre d'états à 2 chiffre
-                if alphabet[j] in automate[k] and str(i) == automate[k][0]:
-                    transitions_lettre.append(automate[k][2])
+                transition = identifier_transition(automate[k], alphabet[j])
+                if alphabet[j] in transition and str(i) == transition[0]:
+                    transitions_lettre.append(transition[2])
 
             if len(transitions_lettre) == 0:
-                transitions_lettre.append("--")
-            l = 0
+                transitions_lettre.append("-")
             for l in range(len(transitions_lettre)):
                 if len(transitions_lettre) > 1 and l != len(transitions_lettre)-1:
                     print(transitions_lettre[l], end=",")
                 else:
-                    print(transitions_lettre[l], end = "       ")
+                    if len(transitions_lettre) > 1:
+                        print(transitions_lettre[l], end="      ")
+                    else:
+                        print(" " + transitions_lettre[l], end = "       ")
 
         print('\n')
+
+
+
+
+def standardiser_automate(automate):
+    # créer un nouvel état
+    automate[1] += 1
+    entries = []
+
+
+
+
+
+
+def lire_numero_transition_depart(ligne):
+    if ord(ligne[1]) > 97:
+        return ligne[0]
+    else:
+        nombre = ""
+        compteur = 0
+        while(ord(ligne[0 + compteur])) < 97:
+            nombre += ligne[0+compteur]
+            compteur += 1
+        return nombre
+
+def lire_numero_transition_arrivee(ligne):
+    compteur = 0
+    nombre = ""
+    while (ord(ligne[0 + compteur]) < 97):
+        compteur += 1
+        print(compteur)
+    for i in range(compteur+1, len(ligne)):
+        print(i)
+        nombre += ligne[i]
+    return nombre
