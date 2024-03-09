@@ -23,4 +23,5 @@ Installez notre projet avec git :
   git clone https://github.com/arthurlnlt/projet-automate
   cd projet-automate
   python main.py
+  pip install -r requirements.txt
 ```
