@@ -118,18 +118,17 @@ def standardiser_automate(automate):
     for i in range(len(transitions)):
         for j in range(len(entrees)):
             if int(entrees[j]) == int(transitions[i][0]):
-
-                print('caca')
                 transi = []
-                transi.append([nouvel_etat, transitions[i][1], transitions[i][2]])
+                transi.append(str(nouvel_etat))
+                transi.append(transitions[i][1])
+                transi.append(transitions[i][2])
                 present = 0
                 for k in range(len(transitions)):
                     if transi[0] == transitions[k][0] and transi[1] == transitions[k][1] and transitions[k][2] == transi[2]:
                         present += 1
-                        print("haha")
+
                 if present == 0:
-                    print(automate)
-                    print(transi)
+                    transitions.append(transi)
                     automate.append(str(nouvel_etat)+str(transitions[i][1])+ str(transitions[i][2]))
                     automate[2] = "1 " + str(nouvel_etat)
                     automate[4] = int(automate[4])
