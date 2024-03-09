@@ -1,3 +1,6 @@
+from tabulate import *
+
+
 # Lit les informations sur l'automate dans le fichier txt
 # Paramètre : fichier qui respecte le format d'écriture des automates
 # Return la matrice automate, contenant les informations sur l'automate
@@ -5,7 +8,7 @@ def readfile(file):
     infos = []
     with open(file, 'r') as f:
         line = f.readline()
-        while (line != ""):
+        while line != "":
             line = line.replace('\n', '')
             infos.append(line)
             line = f.readline()
@@ -79,33 +82,25 @@ def trier_etats_arrivee(transition):
 # Paramètre : matrice d'un automate lu
 # Return : rien → fonction d'affichage
 def afficher_automate(automate):
-    print("        ", end="")
+    matrice_affichage = []
+    matrice_ligne = ["Fonction", "Etat"]
     alphabet = creer_alphabet(automate)
     for i in range(int(automate[0])):
-        print("         " + alphabet[i], end="")
-    print('\n')
+        matrice_ligne.append(alphabet[i])
+    matrice_affichage.append(matrice_ligne)
     for i in range(int(automate[1])):
+        matrice_ligne = []
         entrees = identifier_entrees(automate)
         sorties = identifier_sorties(automate)
         if i in entrees and i not in sorties:
-            print('  E ', end="  |")
-            print(" ", end="")
+            matrice_ligne.append('E')
         elif i not in entrees and i in sorties:
-            print('  S ', end="  |")
-            print(" ", end="")
+            matrice_ligne.append('S')
         elif i in entrees and i in sorties:
-            print(" E/S", end="  | ")
-
+            matrice_ligne.append("E/S")
         else:
-            print("     ", end=" | ")
-        print("  ", end="")
-        if 0 <= i <= 9:
-            print(i, end="    |  ")
-        if 10 <= i <= 99:
-            print(i, end="   |  ")
-        if 100 <= i <= 999:
-            print(i, end="  |  ")
-
+            matrice_ligne.append(' ')
+        matrice_ligne.append(str(i))
         for j in range(len(alphabet)):
             transitions_lettre = []
             for k in range(int(automate[4])):
@@ -113,20 +108,16 @@ def afficher_automate(automate):
                 transition = trier_etats_arrivee(transition)
                 if alphabet[j] == transition[k][1] and str(i) == transition[k][0]:
                     transitions_lettre.append(transition[k][2])
-
             if len(transitions_lettre) == 0:
                 transitions_lettre.append("-")
-            for l in range(len(transitions_lettre)):
-                if len(transitions_lettre) > 1 and l != len(transitions_lettre) - 1:
-                    print(transitions_lettre[l], end=",")
-                else:
-                    if len(transitions_lettre) > 1:
-                        print(transitions_lettre[l], end="   |    ")
-                    else:
-                        print(" " + transitions_lettre[l], end="   |    ")
-        print('\n')
-    print('\n')
-    print('\n')
+            matrice_ligne.append(transitions_lettre)
+        matrice_affichage.append(matrice_ligne)
+    # Suppression des sous tableaux → conversion les listes en chaines de caractères séparées par des virgules 
+    for ligne in matrice_affichage:
+        for j in range(len(ligne)):
+            if isinstance(ligne[j], list):
+                ligne[j] = ', '.join(ligne[j])
+    print(tabulate(matrice_affichage, headers="firstrow", tablefmt="fancy_grid", stralign="center", numalign="center"))
 
 
 # Fonction permettant de standardiser un automate
