@@ -14,6 +14,12 @@ def readfile(file):
             line = f.readline()
     return infos
 
+def lire_saisie_utilisateur():
+    entree = input()
+    entree.replace('\n', '')
+    return entree
+
+
 
 # Identifie les entrées à partir de la matrice automate
 # Paramètre : matrice d'un automate lu
@@ -119,6 +125,18 @@ def afficher_automate(automate):
                 ligne[j] = ', '.join(ligne[j])
     print(tabulate(matrice_affichage, headers="firstrow", tablefmt="fancy_grid", stralign="center", numalign="center"))
 
+def verification_standard(automate):
+    entrees = identifier_entrees(automate)
+    transitions = recuperer_transition(automate)
+    if len(entrees) != 1:
+        return 0
+    else:
+        for i in range(len(transitions)):
+            if transitions[i][2] == entrees[0]:
+                return 0
+    return 1
+
+
 
 # Fonction permettant de standardiser un automate
 # Paramètre : matrice d'un automate lu
@@ -147,3 +165,25 @@ def standardiser_automate(automate):
                     automate[4] = int(automate[4])
                     automate[4] += 1
     return automate
+
+
+def verification_deterministe(automate):
+    entrees = identifier_entrees(automate)
+    transitions = recuperer_transition(automate)
+    if len(entrees) != 1:
+        return 0
+    for i in range(int(automate[1])):
+        transi = []
+        for j in range(len(transitions)):
+            if i == int(transitions[j][0]):
+                transi.append(transitions[j])
+        for k in range(len(transi)):
+            for l in range(len(transi)):
+                if transi[k][0] == transi[l][0] and transi[k][1] == transi[l][1] and transi[l][2] != transi[k][2]:
+                    return 0
+    return 1
+
+
+def determiniser_automate(automate):
+    # à compléter (c'est dur smr)
+    return 0
