@@ -14,11 +14,11 @@ def readfile(file):
             line = f.readline()
     return infos
 
+
 def lire_saisie_utilisateur():
     entree = input()
     entree.replace('\n', '')
     return entree
-
 
 
 # Identifie les entrées à partir de la matrice automate
@@ -125,6 +125,7 @@ def afficher_automate(automate):
                 ligne[j] = ', '.join(ligne[j])
     print(tabulate(matrice_affichage, headers="firstrow", tablefmt="fancy_grid", stralign="center", numalign="center"))
 
+
 def verification_standard(automate):
     entrees = identifier_entrees(automate)
     transitions = recuperer_transition(automate)
@@ -135,7 +136,6 @@ def verification_standard(automate):
             if transitions[i][2] == entrees[0]:
                 return 0
     return 1
-
 
 
 # Fonction permettant de standardiser un automate
@@ -180,10 +180,50 @@ def verification_deterministe(automate):
         for k in range(len(transi)):
             for l in range(len(transi)):
                 if transi[k][0] == transi[l][0] and transi[k][1] == transi[l][1] and transi[l][2] != transi[k][2]:
-                    return 0
+                    return 2
     return 1
 
 
 def determiniser_automate(automate):
     # à compléter (c'est dur smr)
     return 0
+
+
+def verification_complet(automate):
+    cases_problematiques = ['']
+    transitions = recuperer_transition(automate)
+    alphabet = creer_alphabet(automate)
+    for i in range(int(automate[1])):
+        for j in range(len(alphabet)):
+            present = False
+            case_problematique = []
+            for k in range(len(transitions)):
+                if alphabet[j] == transitions[k][1] and i == int(transitions[k][0]):
+                    present = True
+            if present is False:
+                case_problematique.append(str(i))
+                case_problematique.append(alphabet[j])
+                cases_problematiques.append(case_problematique)
+    if len(cases_problematiques) >=2:
+        cases_problematiques[0] = 0
+        return cases_problematiques
+    else:
+        cases_problematiques[0] = 1
+        return cases_problematiques
+
+def completer_automate(automate):
+    etats_problematiques = verification_complet(automate)
+    alphabet = creer_alphabet(automate)
+    automate[1] = int(automate[1])
+    automate[1] += 1
+    nouvel_etat = str(automate[1]-1)
+    automate[4] = int(automate[4])
+    for i in range(1, len(etats_problematiques), 1):
+        automate[4] += 1
+        automate.append(etats_problematiques[i][0] + etats_problematiques[i][1] + nouvel_etat)
+    for i in range(len(alphabet)):
+        automate[4] += 1
+        automate.append(nouvel_etat + alphabet[i] + nouvel_etat)
+    return automate
+
+

@@ -23,13 +23,34 @@ while input != "fin":
 
     else:
         print("Votre automate est déja standardisé !")
-    if verification_deterministe(automate) == 0:
-        print("Votre automate n'est pas déterministe. Voulez-vous le déterminiser ? (oui/non)")
+    complet = verification_complet(automate)
+    if complet[0] == 0:
+        print("Votre automate n'est pas complet dans les cases :", end=" ")
+        for i in range(1, len(complet), 1):
+            print(complet[i][0] + complet[i][1], end = " ")
+        print("Voulez-vous le compléter ? (oui/non)")
+        entree = lire_saisie_utilisateur()
+        if entree == "fin":
+            break
+        if entree == "oui":
+            automate = completer_automate(automate)
+            print("Voici l'automate complété: ")
+            afficher_automate(automate)
+    else:
+        print("Votre automate est déjà complet !")
+    deterministe = verification_deterministe(automate)
+    if deterministe == 0 or deterministe == 2:
+        if deterministe == 1:
+            print("Votre automate n'est pas déterministe (trop d'entrées). Voulez-vous le déterminiser ? (oui/non)")
+        else:
+            print("Votre automate n'est pas déterministe (ambiguité). Voulez-vous le déterminiser ? (oui/non)")
         entree = lire_saisie_utilisateur()
         if entree == "fin":
             break
         if entree == "oui":
             automate = determiniser_automate(automate)
             print("Voici l'automate determinisé")
-            afficher_automate(automate)
+    else:
+        print("Votre automate est déja déterministe !")
+
 
