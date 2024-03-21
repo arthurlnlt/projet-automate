@@ -1,6 +1,5 @@
 from functions import *
 
-
 entree = ''
 while input != "fin":
     print("Projet Automates Groupe ..")
@@ -25,9 +24,9 @@ while input != "fin":
         print("Votre automate est déja standardisé !")
     complet = verification_complet(automate)
     if complet[0] == 0:
-        print("Votre automate n'est pas complet dans les cases :", end=" ")
+        print("Votre automate n'est pas complété dans les cases :", end=" ")
         for i in range(1, len(complet), 1):
-            print(complet[i][0] + complet[i][1], end = " ")
+            print(complet[i][0] + complet[i][1], end=" ")
         print("Voulez-vous le compléter ? (oui/non)")
         entree = lire_saisie_utilisateur()
         if entree == "fin":
@@ -48,9 +47,8 @@ while input != "fin":
         if entree == "fin":
             break
         if entree == "oui":
-            automate = determiniser_automate(automate)
             print("Voici l'automate determinisé")
     else:
         print("Votre automate est déja déterministe !")
-
-
+    print("Lecture de mots : (saisissez 'fin' pour arrêter la saisie)")
+    print(lire_mot())

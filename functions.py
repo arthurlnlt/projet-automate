@@ -25,7 +25,6 @@ def lire_saisie_utilisateur():
 # Paramètre : matrice d'un automate lu
 # Return une liste d'entrées
 def identifier_entrees(automate):
-    matrice = []
     matrice = automate[2].split(' ')
     for i in range(len(matrice)):
         matrice[i] = int(matrice[i])
@@ -38,7 +37,6 @@ def identifier_entrees(automate):
 # Paramètre : matrice d'un automate lu
 # Return une liste de sorties
 def identifier_sorties(automate):
-    matrice = []
     matrice = automate[3].split(' ')
     for i in range(len(matrice)):
         matrice[i] = int(matrice[i])
@@ -185,8 +183,29 @@ def verification_deterministe(automate):
 
 
 def determiniser_automate(automate):
-    # à compléter (c'est dur smr)
-    return 0
+    matrice = [[[1, 2, 3], [5, 6], [4, 0]], [[5, 6], [4, 0]], [[4, 0], [1, 2, 3]], [[123, 'a', 40], [56, 'b', 123]]]
+    entrees = identifier_entrees(automate)
+    transitions = recuperer_transition(automate)
+    nouvelle_matrice = [[]]
+    nouvelle_matrice[0].append(entrees)
+    transitions_nouvel_etat = recuperer_transitions_etat(nouvelle_matrice[0][0], transitions)
+    nouvel_etat = ''
+    for i in range(len(nouvelle_matrice[0][0])):
+        nouvel_etat += str(nouvelle_matrice[0][0][i])
+    for i in range(len(transitions_nouvel_etat)):
+        nouvelle_matrice.append(nouvel_etat)
+    print(nouvel_etat)
+    print(transitions_nouvel_etat)
+
+
+def recuperer_transitions_etat(nouvel_etat, transitions):
+    transitions_nouvel_etat = []
+    for i in range(len(nouvel_etat)):
+        for j in range(len(transitions)):
+            if nouvel_etat[i] == int(transitions[j][0]):
+                matricetemp = [str(nouvel_etat[i]), transitions[j][1], transitions[j][2]]
+                transitions_nouvel_etat.append(matricetemp)
+    return transitions_nouvel_etat
 
 
 def verification_complet(automate):
@@ -204,19 +223,20 @@ def verification_complet(automate):
                 case_problematique.append(str(i))
                 case_problematique.append(alphabet[j])
                 cases_problematiques.append(case_problematique)
-    if len(cases_problematiques) >=2:
+    if len(cases_problematiques) >= 2:
         cases_problematiques[0] = 0
         return cases_problematiques
     else:
         cases_problematiques[0] = 1
         return cases_problematiques
 
+
 def completer_automate(automate):
     etats_problematiques = verification_complet(automate)
     alphabet = creer_alphabet(automate)
     automate[1] = int(automate[1])
     automate[1] += 1
-    nouvel_etat = str(automate[1]-1)
+    nouvel_etat = str(automate[1] - 1)
     automate[4] = int(automate[4])
     for i in range(1, len(etats_problematiques), 1):
         automate[4] += 1
@@ -227,3 +247,12 @@ def completer_automate(automate):
     return automate
 
 
+def lire_mot():
+    mot = ''
+    mots = []
+    while mot != 'fin':
+        mot = input()
+        mot.replace('\n', '')
+        if mot != 'fin':
+            mots.append(mot)
+    return mots
