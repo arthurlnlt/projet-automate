@@ -184,28 +184,23 @@ def verification_deterministe(automate):
 
 def determiniser_automate(automate):
     matrice = [[[1, 2, 3], [5, 6], [4, 0]], [[5, 6], [4, 0]], [[4, 0], [1, 2, 3]], [[123, 'a', 40], [56, 'b', 123]]]
+
     entrees = identifier_entrees(automate)
     transitions = recuperer_transition(automate)
-    nouvelle_matrice = [[]]
-    nouvelle_matrice[0].append(entrees)
-    transitions_nouvel_etat = recuperer_transitions_etat(nouvelle_matrice[0][0], transitions)
-    nouvel_etat = ''
-    for i in range(len(nouvelle_matrice[0][0])):
-        nouvel_etat += str(nouvelle_matrice[0][0][i])
-    for i in range(len(transitions_nouvel_etat)):
-        nouvelle_matrice.append(nouvel_etat)
-    print(nouvel_etat)
-    print(transitions_nouvel_etat)
+    for i in range(automate[1]):
+        print(i)
+        matricetemp = print(recuperer_transitions_etat(i, transitions))
+        #for j in range(len(matricetemp)):
 
 
-def recuperer_transitions_etat(nouvel_etat, transitions):
-    transitions_nouvel_etat = []
-    for i in range(len(nouvel_etat)):
-        for j in range(len(transitions)):
-            if nouvel_etat[i] == int(transitions[j][0]):
-                matricetemp = [str(nouvel_etat[i]), transitions[j][1], transitions[j][2]]
-                transitions_nouvel_etat.append(matricetemp)
-    return transitions_nouvel_etat
+
+
+def recuperer_transitions_etat(etat, transitions):
+    transitions_etat = []
+    for i in range(len(transitions)):
+        if etat == int(transitions[i][0]):
+            transitions_etat.append(transitions[i])
+    return transitions_etat
 
 
 def verification_complet(automate):

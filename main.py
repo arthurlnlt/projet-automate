@@ -1,4 +1,10 @@
 from functions import *
+entree = '17'
+file = "Automates/E3-" + entree + ".txt"
+automate = (readfile(file))
+standardiser_automate(automate)
+determiniser_automate(automate)
+
 
 entree = ''
 while input != "fin":
@@ -7,9 +13,10 @@ while input != "fin":
     entree = lire_saisie_utilisateur()
     if entree == "fin":
         break
-    file = "E1-" + entree + ".txt"
+    file = "Automates/E3-" + entree + ".txt"
     automate = (readfile(file))
     afficher_automate(automate)
+    print(recuperer_transition(automate))
     if verification_standard(automate) != 1:
         print("Votre automate n'est pas standardisé. Voulez-vous le standardiser ? (oui/non)")
         entree = lire_saisie_utilisateur()
@@ -48,6 +55,7 @@ while input != "fin":
             break
         if entree == "oui":
             print("Voici l'automate determinisé")
+
     else:
         print("Votre automate est déja déterministe !")
     print("Lecture de mots : (saisissez 'fin' pour arrêter la saisie)")
