@@ -65,3 +65,8 @@ while input != "fin":
     else:
         print("Votre automate est déja déterministe !")
     print("Lecture de mots : (saisissez 'fin' pour arrêter la saisie)")
+    mot = str(input())
+    if reconnaitre_mot(mot, automate) is False:
+        print("Le mot n'est pas reconnu par l'automate")
+    else:
+        print("Le mot est reconnu par l'automate")
