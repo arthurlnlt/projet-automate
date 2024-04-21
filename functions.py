@@ -276,3 +276,21 @@ def trace_execution(automate, numautomate, operation):
         for i in range(len(automate)):
             f.write(str(automate[i]) + '\n')
         f.write('\n')
+
+def reconnaitre_mot(mot, automate):
+    etat_courant = int(automate[2].split()[1])  # L'état initial est supposé être le premier après '1 '
+    transitions = recuperer_transition(automate)
+
+    for lettre in mot:
+        transition_trouvee = False
+        for transition in transitions:
+            etat_depart, symbole, etat_arrivee = int(transition[0]), transition[1], int(transition[2])
+            if etat_depart == etat_courant and symbole == lettre:
+                etat_courant = etat_arrivee
+                transition_trouvee = True
+                break  # Sortir dès qu'une transition valide est trouvée pour cette lettre
+        if not transition_trouvee:
+            return False  # Si aucune transition valide n'est trouvée pour un symbole, le mot n'est pas accepté
+
+    # Vérifier si l'état dans lequel on termine est un état terminal
+    return etat_courant in map(int, identifier_sorties(automate))
