@@ -1,10 +1,15 @@
 from functions import *
-entree = '17'
+
+print("Projet Automates Groupe ..")
+print("Choisissez le numéro de l'automate :")
+entree = lire_saisie_utilisateur()
 file = "Automates/E3-" + entree + ".txt"
 automate = (readfile(file))
-standardiser_automate(automate)
-determiniser_automate(automate)
-
+identifier_entrees(automate)
+identifier_sorties(automate)
+afficher_automate(automate)
+complementaire(automate)
+afficher_automate(automate)
 
 entree = ''
 while input != "fin":
@@ -26,7 +31,6 @@ while input != "fin":
             automate = standardiser_automate(automate)
             print("Voici l'automate standardisé")
             afficher_automate(automate)
-
     else:
         print("Votre automate est déja standardisé !")
     complet = verification_complet(automate)
@@ -59,4 +63,3 @@ while input != "fin":
     else:
         print("Votre automate est déja déterministe !")
     print("Lecture de mots : (saisissez 'fin' pour arrêter la saisie)")
-    print(lire_mot())

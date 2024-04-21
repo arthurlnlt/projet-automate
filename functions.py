@@ -131,7 +131,7 @@ def verification_standard(automate):
         return 0
     else:
         for i in range(len(transitions)):
-            if transitions[i][2] == entrees[0]:
+            if int(transitions[i][2]) == entrees[0]:
                 return 0
     return 1
 
@@ -183,15 +183,16 @@ def verification_deterministe(automate):
 
 
 def determiniser_automate(automate):
-    matrice = [[[1, 2, 3], [5, 6], [4, 0]], [[5, 6], [4, 0]], [[4, 0], [1, 2, 3]], [[123, 'a', 40], [56, 'b', 123]]]
-
     entrees = identifier_entrees(automate)
     transitions = recuperer_transition(automate)
-    for i in range(automate[1]):
-        print(i)
-        matricetemp = print(recuperer_transitions_etat(i, transitions))
-        #for j in range(len(matricetemp)):
 
+
+def recuperer_transitions_lettre(lettre, transitions_etat):
+    matrice = []
+    for i in range(len(transitions_etat)):
+        if transitions_etat[i][1] == lettre:
+            matrice.append(transitions_etat[i])
+    return matrice
 
 
 
@@ -251,3 +252,18 @@ def lire_mot():
         if mot != 'fin':
             mots.append(mot)
     return mots
+
+def complementaire(automate):
+    tableau = identifier_sorties(automate)
+    for i in range (int(automate[1])):     #On parcours tout les automates
+        if (i in tableau): #Si l'automate est présent dans les sorties on doit le retirer
+            for j in range (len(tableau)-1):
+                if (tableau[j] == i):
+                    del tableau[j]
+        else:                                   #Sinon on doit l'ajouter
+            tableau.append(i)
+    st = ''
+    st+= str(len(tableau))
+    for i in tableau:
+        st+= ' '+str(i)
+    automate[3] = st
