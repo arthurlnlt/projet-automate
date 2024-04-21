@@ -267,3 +267,12 @@ def complementaire(automate):
     for i in tableau:
         st+= ' '+str(i)
     automate[3] = st
+    return automate
+
+
+def trace_execution(automate, numautomate, operation):
+    with open("E3-"+ numautomate + "_traite.txt", 'a') as f:
+        f.write("Opération effectuée: " + operation + '\n')
+        for i in range(len(automate)):
+            f.write(str(automate[i]) + '\n')
+        f.write('\n')

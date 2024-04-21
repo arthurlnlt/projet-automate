@@ -1,0 +1,77 @@
+Opération effectuée: Automate originel
+4
+5
+1 1
+1 0
+8
+1a2
+2a2
+2b3
+3b3
+3c4
+4c4
+4d0
+0d0
+
+Opération effectuée: complétion
+4
+6
+1 1
+1 0
+24
+1a2
+2a2
+2b3
+3b3
+3c4
+4c4
+4d0
+0d0
+0a5
+0b5
+0c5
+1b5
+1c5
+1d5
+2c5
+2d5
+3a5
+3d5
+4a5
+4b5
+5a5
+5b5
+5c5
+5d5
+
+Opération effectuée: complémentaire
+4
+6
+1 1
+6 0 1 2 3 4 5
+24
+1a2
+2a2
+2b3
+3b3
+3c4
+4c4
+4d0
+0d0
+0a5
+0b5
+0c5
+1b5
+1c5
+1d5
+2c5
+2d5
+3a5
+3d5
+4a5
+4b5
+5a5
+5b5
+5c5
+5d5
+

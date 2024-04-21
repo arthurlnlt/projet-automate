@@ -1,0 +1,26 @@
+Opération effectuée: Automate originel
+1
+1
+1 0
+1 0
+1
+0a0
+
+Opération effectuée: standardisation
+1
+2
+1 1
+1 0
+2
+0a0
+1a0
+
+Opération effectuée: complémentaire
+1
+2
+1 1
+2 0 1
+2
+0a0
+1a0
+

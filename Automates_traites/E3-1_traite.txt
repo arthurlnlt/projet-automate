@@ -1,0 +1,14 @@
+Opération effectuée: Automate originel
+0
+1
+1 0
+1 0
+0
+
+Opération effectuée: complémentaire
+0
+1
+1 0
+1 0
+0
+

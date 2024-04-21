@@ -1,0 +1,136 @@
+Opération effectuée: Automate originel
+4
+9
+5 1 6 7 8 0
+1 5
+8
+1a2
+6a2
+2b3
+7b3
+3c4
+8c4
+4d5
+0d5
+
+Opération effectuée: standardisation
+4
+10
+1 9
+1 5
+12
+1a2
+6a2
+2b3
+7b3
+3c4
+8c4
+4d5
+0d5
+9a2
+9b3
+9c4
+9d5
+
+Opération effectuée: complétion
+4
+11
+1 9
+1 5
+44
+1a2
+6a2
+2b3
+7b3
+3c4
+8c4
+4d5
+0d5
+9a2
+9b3
+9c4
+9d5
+0a10
+0b10
+0c10
+1b10
+1c10
+1d10
+2a10
+2c10
+2d10
+3a10
+3b10
+3d10
+4a10
+4b10
+4c10
+5a10
+5b10
+5c10
+5d10
+6b10
+6c10
+6d10
+7a10
+7c10
+7d10
+8a10
+8b10
+8d10
+10a10
+10b10
+10c10
+10d10
+
+Opération effectuée: complémentaire
+4
+11
+1 9
+10 0 1 2 3 4 6 7 8 9 10
+44
+1a2
+6a2
+2b3
+7b3
+3c4
+8c4
+4d5
+0d5
+9a2
+9b3
+9c4
+9d5
+0a10
+0b10
+0c10
+1b10
+1c10
+1d10
+2a10
+2c10
+2d10
+3a10
+3b10
+3d10
+4a10
+4b10
+4c10
+5a10
+5b10
+5c10
+5d10
+6b10
+6c10
+6d10
+7a10
+7c10
+7d10
+8a10
+8b10
+8d10
+10a10
+10b10
+10c10
+10d10
+
